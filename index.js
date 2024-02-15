@@ -70,5 +70,4 @@ app.use(require("./src/middlewares/errorHandler"));
 // require("./src/sync")();
 
 /* -------------------------------------------------------------------------- */
-
 app.listen(PORT, () => console.log("Running on http://127.0.0.1:" + PORT));
