@@ -666,7 +666,7 @@
     "BlogPost": {
       "type": "object",
       "properties": {
-        "blogCategoryId": {
+        "categoryId": {
           "type": "object",
           "properties": {
             "type": {

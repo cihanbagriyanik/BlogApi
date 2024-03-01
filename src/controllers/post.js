@@ -10,7 +10,7 @@ const Post = require("../models/post");
 module.exports = {
   //! GET
   list: async (req, res) => {
-    const data = await res.getModelList(Post, "blogCategoryId");
+    const data = await res.getModelList(Post, "categoryId");
 
     res.status(200).send({
       error: false,
@@ -34,7 +34,7 @@ module.exports = {
   //! /:postId -> GET
   read: async (req, res) => {
     const data = await Post.findOne({ _id: req.params.postId }).populate(
-      "blogCategoryId"
+      "categoryId"
     );
 
     res.status(200).send({

@@ -27,10 +27,10 @@ module.exports = async () => {
 
     if (blogCategory) {
         BlogPost.updateMany({ //? Filter:
-            "blogCategoryId": { $exists: false } // field yok ise
+            "categoryId": { $exists: false } // field yok ise
         }, { //? Update:
-            "blogCategoryId": blogCategory._id // kaydı ata
-            // $unset: { "blogCategoryId": 1 } // field sil
+            "categoryId": blogCategory._id // kaydı ata
+            // $unset: { "categoryId": 1 } // field sil
         }).catch(err => console.log(err))
     }
 
@@ -59,7 +59,7 @@ module.exports = async () => {
   for (let key in [...Array(200)]) {
     await BlogPost.create({
       userId: user._id,
-      blogCategoryId: blogCategory._id,
+      categoryId: blogCategory._id,
       title: `test ${key} title`,
       content: `test ${key} content`,
       published: Boolean(key % 2),

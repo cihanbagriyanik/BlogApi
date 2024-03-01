@@ -9,9 +9,9 @@ const { mongoose } = require("../configs/dbConnection");
 //? Post:
 const PostSchema = new mongoose.Schema(
   {
-    blogCategoryId: {
+    categoryId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "BlogCategory",
+      ref: "Categories",
       required: true,
     },
 
