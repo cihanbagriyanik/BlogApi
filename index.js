@@ -1,73 +1,95 @@
 "use strict";
-
-/* -------------------------------------------------------------------------- //
-
-    BLOGAPP API Project INDEX.js
-
+/* --------------------------------------------------------------------------
+    * NODEJS EXPRESS | Blog API
+----------------------------------------------------------------------------- */
+/*
+    $ npm init -y
+    $ npm i express dotenv mongoose express-async-errors morgan jsonwebtoken swagger-autogen swagger-ui-express redoc-express nodemailer
+    
+    // $ touch .env
+    $ touch .gitignore
+    https://www.toptal.com/developers/gitignore  (“node”) then copy paste
+    
+    $ mkdir logs
+    $ nodemon
+*/
 /* -------------------------------------------------------------------------- */
-
-/* -------------------------------------------------------------------------- */
-//? Express Import
+//? Required Modules:
 const express = require("express");
 const app = express();
 
-/* -------------------------------------------------------------------------- */
-//? DOTENV Import
+// envVariables to process.env:
 require("dotenv").config();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env?.PORT || 8000;
 
-/* -------------------------------------------------------------------------- */
-//? DB CONNECTION
-require("./src/configs/dbConnection");
-
-/* -------------------------------------------------------------------------- */
-//? SessionCookies:
-const session = require("cookie-session");
-
-app.use(
-  session({
-    secret: process.env.SECRET_KEY || "write_random_chars_in_here",
-  })
-);
-
-/* -------------------------------------------------------------------------- */
-//? Filtering, Searching, Sorting, Pagination
-app.use(require("./src/middlewares/findSearchSortPage"));
-
-/* -------------------------------------------------------------------------- */
-//? JSON
-app.use(express.json());
-
-/* -------------------------------------------------------------------------- */
-//? Express-async-errors Import
+// asyncErrors to errorHandler:
 require("express-async-errors");
 
 /* -------------------------------------------------------------------------- */
-//? HOME Page
+//? Configrations:
+
+// Connect to DB:
+const { dbConnection } = require("./src/configs/dbConnection");
+dbConnection();
+
+/* -------------------------------------------------------------------------- */
+//? Middlewares:
+
+// Accept JSON:
+app.use(express.json());
+
+// Check Token:
+app.use(require("./src/middlewares/authentication"));
+
+// morgan-logger:
+// app.use(require("./src/middlewares/logger")); //*IN Comment coz of Deployment
+
+// res.getModelList:
+app.use(require("./src/middlewares/findSearchSortPage"));
+
+/* -------------------------------------------------------------------------- */
+//? Routes:
+// HomePath:
 app.all("/", (req, res) => {
-  // res.send("Welcome First Express Project"); // For with out Cookies
-  /* -------------------------------------------------------------------------- */
-  // With Cookies
   res.send({
-    message: "Welcome First ExpressJs Project with Mongo", // INSIDE OBJE
-    session: req.session,
-    login: req.session.email ? true : false,
+    error: false,
+    message: "Welcome to Blog Api",
+    isLogin: req.isLogin,
+    documents: {
+      swagger: "/documents/swagger",
+      redoc: "/documents/redoc",
+      json: "/documents/json",
+    },
+    user: req.user,
   });
-  /* -------------------------------------------------------------------------- */
 });
 
-/* -------------------------------------------------------------------------- */
-//? ROUTES
-app.use("/user", require("./src/routers/userRouter"));
-app.use("/blog", require("./src/routers/blogRouter"));
+// auth:
+app.use("/auth", require("./src/routers/auth"));
+
+// user:
+app.use("/users", require("./src/routers/user"));
+
+// blog category:
+app.use("/categories", require("./src/routers/category"));
+
+// blog post:
+app.use("/blogs", require("./src/routers/post"));
+
+// token:
+app.use("/tokens", require("./src/routers/token"));
+
+// document:
+app.use("/documents", require("./src/routers/document"));
 
 /* -------------------------------------------------------------------------- */
-//? ERROR HANDLER
+//? errorHandler:
 app.use(require("./src/middlewares/errorHandler"));
 
 /* -------------------------------------------------------------------------- */
-//? SYNCRONIZATION:
-// require("./src/sync")();
+//? RUN SERVER:
+app.listen(PORT, () => console.log("http://127.0.0.1:" + PORT));
 
 /* -------------------------------------------------------------------------- */
-app.listen(PORT, () => console.log("Running on http://127.0.0.1:" + PORT));
+//? Syncronization (must be in commentLine):
+// require('./src/helpers/sync')() // !!! It clears database.

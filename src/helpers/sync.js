@@ -3,14 +3,15 @@
     * NODEJS EXPRESS | Blog API
 ----------------------------------------------------------------------------- */
 
-// app.use(errorHandler):
+// sync():
 
 /* -------------------------------------------------------------------------- */
-module.exports = (err, req, res, next) => {
-  return res.status(res?.errorStatusCode || 500).send({
-    error: true,
-    message: err.message,
-    cause: err.cause,
-    body: req.body,
-  });
+module.exports = async function () {
+  return null;
+
+  /* CLEAR DATABASE */
+  const { mongoose } = require("../configs/dbConnection");
+  await mongoose.connection.dropDatabase();
+  console.log("- Database and all data DELETED!");
+  /* CLEAR DATABASE */
 };

@@ -1,14 +1,21 @@
 "use strict";
 /* -------------------------------------------------------
-    * BLOG API PROJECT (MONGODB CONNECTION)
+    * NODEJS EXPRESS | Flight API
 ------------------------------------------------------- */
-
-/* -------------------------------------------------------------------------- */
-//* Data Base Connection
+// MongoDB Connection:
 
 const mongoose = require("mongoose");
 
-mongoose
-  .connect(process.env.MONGODB)
-  .then(() => console.log("DB Connected"))
-  .catch((err) => console.log("DB NOT Connected", err));
+const dbConnection = function () {
+  // Connect:
+  mongoose
+    .connect(process.env.MONGODB)
+    .then(() => console.log("* DB Connected * "))
+    .catch((err) => console.log("* DB Not Connected * ", err));
+};
+
+/* ------------------------------------------------------- */
+module.exports = {
+  mongoose,
+  dbConnection,
+};

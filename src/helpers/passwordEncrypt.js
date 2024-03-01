@@ -1,17 +1,15 @@
 "use strict";
-/* -------------------------------------------------------
-    * USER MODEL PASSWORD ENCRYPTION
-------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+    * NODEJS EXPRESS | Blog API
+----------------------------------------------------------------------------- */
+// passwordEncrypt(password:string):
 
-// Password Encrypt:
-// https://nodejs.org/api/crypto.html#cryptopbkdf2syncpassword-salt-iterations-keylen-digest
-const crypto = require("node:crypto");
-
-// const keyCode = "write_random_chars_in_here";
-const keyCode = process.env.SECRET_KEY || "write_random_chars_in_here";
-const loopCount = 10_000;
-const charCount = 32; // write 32 for 64
-const encType = "sha512";
+/* -------------------------------------------------------------------------- */
+const crypto = require("node:crypto"),
+  keyCode = process.env.SECRET_KEY,
+  loopCount = 10_000,
+  charCount = 32,
+  encType = "sha512";
 
 module.exports = function (password) {
   return crypto
