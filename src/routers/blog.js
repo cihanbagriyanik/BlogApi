@@ -5,18 +5,19 @@
 //? Requaring
 const router = require("express").Router();
 
-const Post = require("../controllers/post");
+const Blog = require("../controllers/blog");
 
 /* -------------------------------------------------------------------------- */
-//? BlogPost:
-router.route("/posts").get(Post.list).post(Post.create);
+//? Blog Router:
+//! URL : /blogs
+router.route("/").get(Blog.list).post(Blog.create);
 
 router
-  .route("/posts/:id")
-  .get(Post.read)
-  .put(Post.update)
-  .patch(Post.update)
-  .delete(Post.delete);
+  .route("/:id")
+  .get(Blog.read)
+  .put(Blog.update)
+  .patch(Blog.update)
+  .delete(Blog.delete);
 
 /* -------------------------------------------------------------------------- */
 //? Export:

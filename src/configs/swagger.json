@@ -663,7 +663,7 @@
         }
       }
     },
-    "BlogPost": {
+    "Blog": {
       "type": "object",
       "properties": {
         "categoryId": {

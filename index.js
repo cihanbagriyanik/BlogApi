@@ -70,11 +70,11 @@ app.use("/auth", require("./src/routers/auth"));
 // user:
 app.use("/users", require("./src/routers/user"));
 
-// blog category:
+// category:
 app.use("/categories", require("./src/routers/category"));
 
-// blog post:
-app.use("/blogs", require("./src/routers/post"));
+// blog:
+app.use("/blogs", require("./src/routers/blog"));
 
 // token:
 app.use("/tokens", require("./src/routers/token"));

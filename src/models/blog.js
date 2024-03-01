@@ -6,8 +6,8 @@
 const { mongoose } = require("../configs/dbConnection");
 
 /* -------------------------------------------------------------------------- */
-//? Post:
-const PostSchema = new mongoose.Schema(
+//? Blog:
+const BlogSchema = new mongoose.Schema(
   {
     categoryId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -34,10 +34,10 @@ const PostSchema = new mongoose.Schema(
   },
 
   {
-    collection: "posts",
+    collection: "blogs",
     timestamps: true,
   }
 );
 
 /* -------------------------------------------------------------------------- */
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Blog", BlogSchema);

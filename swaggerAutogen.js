@@ -45,8 +45,8 @@ const document = {
   definitions: {
     // Models:
     User: require("./src/models/user").schema.obj,
-    BlogCategory: require("./src/models/blogCategory").schema.obj,
-    BlogPost: require("./src/models/blogPost").schema.obj,
+    Category: require("./src/models/category").schema.obj,
+    Blog: require("./src/models/blog").schema.obj,
     /*
     ...
     */

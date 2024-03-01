@@ -1,7 +1,7 @@
 "use strict";
 
-const { User } = require("./models/userModel");
-const { BlogCategory, BlogPost } = require("./models/blogModel");
+const { User } = require("./models/user");
+const { BlogCategory, Blog } = require("./models/blog");
 
 module.exports = async () => {
   /* User *
@@ -11,7 +11,7 @@ module.exports = async () => {
     // console.log(user._id)
 
     if (user) {
-        BlogPost.updateMany({ //? Filter:
+        Blog.updateMany({ //? Filter:
             "userId": { $exists: false } // field yok ise
         }, { //? Update:
             "userId": user._id // kaydı ata
@@ -26,7 +26,7 @@ module.exports = async () => {
     // console.log(blogCategory._id)
 
     if (blogCategory) {
-        BlogPost.updateMany({ //? Filter:
+        Blog.updateMany({ //? Filter:
             "categoryId": { $exists: false } // field yok ise
         }, { //? Update:
             "categoryId": blogCategory._id // kaydı ata
@@ -40,9 +40,7 @@ module.exports = async () => {
   await BlogCategory.deleteMany().then(() =>
     console.log(" - BlogCategory Deleted All")
   );
-  await BlogPost.deleteMany().then(() =>
-    console.log(" - BlogPost Deleted All")
-  );
+  await Blog.deleteMany().then(() => console.log(" - Blog Deleted All"));
 
   // Example User:
   const user = await User.create({
@@ -55,9 +53,9 @@ module.exports = async () => {
   const blogCategory = await BlogCategory.create({
     name: "Test Category",
   });
-  // Example Posts:
+  // Example s:
   for (let key in [...Array(200)]) {
-    await BlogPost.create({
+    await Blog.create({
       userId: user._id,
       categoryId: blogCategory._id,
       title: `test ${key} title`,
