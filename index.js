@@ -67,6 +67,9 @@ app.all("/", (req, res) => {
 // auth:
 app.use("/auth", require("./src/routers/auth"));
 
+// token:
+app.use("/tokens", require("./src/routers/token"));
+
 // user:
 app.use("/users", require("./src/routers/user"));
 
@@ -75,9 +78,6 @@ app.use("/categories", require("./src/routers/category"));
 
 // blog:
 app.use("/blogs", require("./src/routers/blog"));
-
-// token:
-app.use("/tokens", require("./src/routers/token"));
 
 // document:
 app.use("/documents", require("./src/routers/document"));

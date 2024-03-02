@@ -10,7 +10,7 @@
       "email": "cihanbagriyanikde@gmail.com"
     },
     "license": {
-      "name": "ISC"
+      "name": "ISC Licence"
     }
   },
   "host": "127.0.0.1:8000",
@@ -129,7 +129,7 @@
           "Users"
         ],
         "summary": "List Users",
-        "description": "  You can send query with endpoint for search[], sort[], page and limit.  <ul> Examples:  <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>  <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>  <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>  <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
+        "description": "  You can use filter[] & search[] & sort[] & page & limit queries with endpoint.  <ul> Examples:  <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>  <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>  <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>  <li>URL/?<b>limit=10&page=1</b></li>  </ul>  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -162,17 +162,25 @@
                   "type": "string",
                   "example": "test@site.com"
                 },
-                "isActive": {
-                  "type": "boolean",
-                  "example": true
+                "firstName": {
+                  "type": "string",
+                  "example": "test"
                 },
-                "isStaff": {
-                  "type": "boolean",
-                  "example": false
+                "lastName": {
+                  "type": "string",
+                  "example": "test"
                 },
-                "isAdmin": {
-                  "type": "boolean",
-                  "example": false
+                "image": {
+                  "type": "string",
+                  "example": ""
+                },
+                "city": {
+                  "type": "string",
+                  "example": ""
+                },
+                "bio": {
+                  "type": "string",
+                  "example": ""
                 }
               }
             }
@@ -238,17 +246,25 @@
                   "type": "string",
                   "example": "test@site.com"
                 },
-                "isActive": {
-                  "type": "boolean",
-                  "example": true
+                "firstName": {
+                  "type": "string",
+                  "example": "test"
                 },
-                "isStaff": {
-                  "type": "boolean",
-                  "example": false
+                "lastName": {
+                  "type": "string",
+                  "example": "test"
                 },
-                "isAdmin": {
-                  "type": "boolean",
-                  "example": false
+                "image": {
+                  "type": "string",
+                  "example": ""
+                },
+                "city": {
+                  "type": "string",
+                  "example": ""
+                },
+                "bio": {
+                  "type": "string",
+                  "example": ""
                 }
               }
             }
@@ -315,17 +331,25 @@
                   "type": "string",
                   "example": "test@site.com"
                 },
-                "isActive": {
-                  "type": "boolean",
-                  "example": true
+                "firstName": {
+                  "type": "string",
+                  "example": "test"
                 },
-                "isStaff": {
-                  "type": "boolean",
-                  "example": false
+                "lastName": {
+                  "type": "string",
+                  "example": "test"
                 },
-                "isAdmin": {
-                  "type": "boolean",
-                  "example": false
+                "image": {
+                  "type": "string",
+                  "example": ""
+                },
+                "city": {
+                  "type": "string",
+                  "example": ""
+                },
+                "bio": {
+                  "type": "string",
+                  "example": ""
                 }
               }
             }
@@ -338,9 +362,13 @@
         }
       }
     },
-    "/blogs/categories": {
+    "/categories/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Categories"
+        ],
+        "summary": "List Categories",
+        "description": "  You can use filter[] & search[] & sort[] & page & limit queries with endpoint.  <ul> Examples:  <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>  <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>  <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>  <li>URL/?<b>limit=10&page=1</b></li>  </ul>  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -348,7 +376,27 @@
         }
       },
       "post": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Create Category",
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Category 1"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -356,8 +404,12 @@
         }
       }
     },
-    "/blogs/categories/{id}": {
+    "/categories/{id}": {
       "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Get Single Category",
         "description": "",
         "parameters": [
           {
@@ -374,6 +426,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Update Category",
         "description": "",
         "parameters": [
           {
@@ -381,6 +437,20 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Category 1"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -390,6 +460,10 @@
         }
       },
       "delete": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Delete Category",
         "description": "",
         "parameters": [
           {
@@ -409,6 +483,10 @@
         }
       },
       "patch": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Update Category",
         "description": "",
         "parameters": [
           {
@@ -416,6 +494,20 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Category 1"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -425,9 +517,20 @@
         }
       }
     },
-    "/blogs/posts": {
+    "/blogs/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "List Blogs",
+        "description": "  You can use filter[] & search[] & sort[] & page & limit queries with endpoint.  <ul> Examples:  <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>  <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>  <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>  <li>URL/?<b>limit=10&page=1</b></li>  </ul>  You can use author=userId query for get all blogs of any user.  ",
+        "parameters": [
+          {
+            "name": "author",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -435,7 +538,43 @@
         }
       },
       "post": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Create Blog",
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "categoryId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f101"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Blog Title 1"
+                },
+                "content": {
+                  "type": "string",
+                  "example": "Blog Content 1"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "http://imageURL"
+                },
+                "isPublish": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -443,8 +582,12 @@
         }
       }
     },
-    "/blogs/posts/{id}": {
+    "/blogs/{id}": {
       "get": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Get Single Blog",
         "description": "",
         "parameters": [
           {
@@ -461,6 +604,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Update Blog",
         "description": "",
         "parameters": [
           {
@@ -468,6 +615,36 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "categoryId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f101"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Blog Title 1"
+                },
+                "content": {
+                  "type": "string",
+                  "example": "Blog Content 1"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "http://imageURL"
+                },
+                "isPublish": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -477,6 +654,10 @@
         }
       },
       "delete": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Delete Blog",
         "description": "",
         "parameters": [
           {
@@ -496,6 +677,10 @@
         }
       },
       "patch": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Update Blog",
         "description": "",
         "parameters": [
           {
@@ -503,6 +688,36 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "categoryId": {
+                  "type": "string",
+                  "example": "65343222b67e9681f937f101"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Blog Title 1"
+                },
+                "content": {
+                  "type": "string",
+                  "example": "Blog Content 1"
+                },
+                "image": {
+                  "type": "string",
+                  "example": "http://imageURL"
+                },
+                "isPublish": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -636,7 +851,7 @@
         }
       }
     },
-    "BlogCategory": {
+    "Category": {
       "type": "object",
       "properties": {
         "name": {
@@ -674,7 +889,7 @@
             },
             "ref": {
               "type": "string",
-              "example": "BlogCategory"
+              "example": "Categories"
             },
             "required": {
               "type": "boolean",

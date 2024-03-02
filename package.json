@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "Cihan Bagriyanik",
-  "license": "ISC",
+  "license": "ISC Licence",
   "dependencies": {
     "cookie-session": "^2.1.0",
     "dotenv": "^16.4.2",
