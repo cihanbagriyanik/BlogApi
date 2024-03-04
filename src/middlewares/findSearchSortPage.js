@@ -48,8 +48,8 @@ module.exports = (req, res, next) => {
   /* FILTERING & SEARCHING & SORTING & PAGINATION */
 
   // Run for output:
-  res.getModelList = async (Model, populate = null) => {
-    return await Model.find({ ...filter, ...search })
+  res.getModelList = async (Model, customFilter = {}, populate = null) => {
+    return await Model.find({ ...filter, ...search, ...customFilter })
       .sort(sort)
       .skip(skip)
       .limit(limit)
@@ -57,8 +57,8 @@ module.exports = (req, res, next) => {
   };
 
   // Details:
-  res.getModelListDetails = async (Model) => {
-    const data = await Model.find({ ...filter, ...search });
+  res.getModelListDetails = async (Model, customFilter = {}) => {
+    const data = await Model.find({ ...filter, ...search, ...customFilter });
 
     let details = {
       filter,
