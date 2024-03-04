@@ -6,13 +6,17 @@
 const { mongoose } = require("../configs/dbConnection");
 
 const passwordEncrypt = require("../helpers/passwordEncrypt");
+
 /* -------------------------------------------------------------------------- */
 // {
 //     "username": "test",
 //     "password": "1234",
 //     "email": "test@site.com",
+//     "firstName": "test",
+//     "lastName": "test",
+//     "isActive": true,
 //     "isAdmin": false,
-//     "isStaff": false,
+//     "isStaff": false
 // }
 /* -------------------------------------------------------------------------- */
 //? User Model:
@@ -45,6 +49,33 @@ const UserSchema = new mongoose.Schema(
         },
         "Email type is not correct.",
       ],
+    },
+
+    firstName: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+
+    lastName: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+
+    image: {
+      type: String,
+      trim: true,
+    },
+
+    city: {
+      type: String,
+      trim: true,
+    },
+
+    bio: {
+      type: String,
+      trim: true,
     },
 
     isActive: {

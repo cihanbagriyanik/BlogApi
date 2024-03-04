@@ -79,6 +79,9 @@ app.use("/categories", require("./src/routers/category"));
 // blog:
 app.use("/blogs", require("./src/routers/blog"));
 
+// comment:
+app.use("/comments", require("./src/routers/comment"));
+
 // document:
 app.use("/documents", require("./src/routers/document"));
 

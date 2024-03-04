@@ -7,24 +7,38 @@ const { mongoose } = require("../configs/dbConnection");
 
 /* -------------------------------------------------------------------------- */
 // {
-//     "name": "Category 1",
+//   "blogId": "65343222b67e9681f937f201",
+//   "userId": "65343222b67e9681f937f201",
+//   "comment": "Comment 1"
 // }
 /* -------------------------------------------------------------------------- */
-//? BlogCategory:
-const CategorySchmea = new mongoose.Schema(
+//? BlogComment:
+const CommentSchmea = new mongoose.Schema(
   {
-    name: {
+    blogId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Blog",
+      required: true,
+    },
+
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
+    comment: {
       type: String,
       trim: true,
-      required: [true, "You should write category name."],
+      required: [true, "You should write your comment."],
     },
   },
 
   {
-    collection: "categories",
+    collection: "comments",
     timestamps: true,
   }
 );
 
 /* -------------------------------------------------------------------------- */
-module.exports = mongoose.model("Categories", CategorySchmea);
+module.exports = mongoose.model("Comments", CommentSchmea);
