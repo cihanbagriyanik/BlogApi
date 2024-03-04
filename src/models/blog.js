@@ -7,8 +7,9 @@ const { mongoose } = require("../configs/dbConnection");
 
 /* -------------------------------------------------------------------------- */
 // {
+//     "userId": "65e61d0ce678a83f55347c70",
+//     "categoryId": "65e61f5513d83183b6e5d00e",
 //     "title": "Blog Title 1",
-//     "content": "Blog Content 1",
 //     "content": "Blog Content 1",
 //     "image": "https://cdn.pixabay.com/photo/2013/07/12/17/47/test-pattern-152459_1280.png",
 //     "isPublish": true,

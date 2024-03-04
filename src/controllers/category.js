@@ -63,7 +63,7 @@ module.exports = {
         #swagger.summary = "Get Single Category"
     */
 
-    const data = await Category.findOne({ _id: req.params.categoryId });
+    const data = await Category.findOne({ _id: req.params.id });
 
     res.status(200).send({
       error: false,
@@ -85,15 +85,12 @@ module.exports = {
           }
     */
 
-    const data = await Category.updateOne(
-      { _id: req.params.categoryId },
-      req.body
-    );
+    const data = await Category.updateOne({ _id: req.params.id }, req.body);
 
     res.status(202).send({
       error: false,
       data,
-      newData: await Category.findOne({ _id: req.params.categoryId }),
+      newData: await Category.findOne({ _id: req.params.id }),
     });
   },
 
@@ -104,7 +101,7 @@ module.exports = {
         #swagger.summary = "Delete Category"
     */
 
-    const data = await Category.deleteOne({ _id: req.params.categoryId });
+    const data = await Category.deleteOne({ _id: req.params.id });
 
     res.status(data.deletedCount >= 1 ? 204 : 404).send({
       error: false,

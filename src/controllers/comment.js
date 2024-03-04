@@ -65,7 +65,7 @@ module.exports = {
         #swagger.summary = "Get Single Comment"
     */
 
-    const data = await Comment.findOne({ _id: req.params.commentId });
+    const data = await Comment.findOne({ _id: req.params.id });
 
     res.status(200).send({
       error: false,
@@ -89,15 +89,12 @@ module.exports = {
           }
     */
 
-    const data = await Comment.updateOne(
-      { _id: req.params.commentId },
-      req.body
-    );
+    const data = await Comment.updateOne({ _id: req.params.id }, req.body);
 
     res.status(202).send({
       error: false,
       data,
-      newData: await Comment.findOne({ _id: req.params.commnetId }),
+      newData: await Comment.findOne({ _id: req.params.id }),
     });
   },
 
@@ -108,7 +105,7 @@ module.exports = {
         #swagger.summary = "Delete Comment"
     */
 
-    const data = await Comment.deleteOne({ _id: req.params.commentId });
+    const data = await Comment.deleteOne({ _id: req.params.id });
 
     res.status(data.deletedCount >= 1 ? 204 : 404).send({
       error: false,

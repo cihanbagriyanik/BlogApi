@@ -29,12 +29,12 @@ module.exports = {
         `
     */
 
-    const data = await res.getModelList(Blog, "categoryId");
+    const data = await res.getModelList(Blog);
 
     res.status(200).send({
       error: false,
       details: await res.getModelListDetails(Blog),
-      data: data,
+      data,
     });
   },
 
@@ -62,7 +62,7 @@ module.exports = {
     res.status(201).send({
       error: false,
       body: req.body,
-      data: data,
+      data,
     });
   },
 
@@ -79,7 +79,7 @@ module.exports = {
 
     res.status(200).send({
       error: false,
-      data: data,
+      data,
     });
   },
 
@@ -105,7 +105,7 @@ module.exports = {
 
     res.status(202).send({
       error: false,
-      data: data,
+      data,
     });
   },
 
