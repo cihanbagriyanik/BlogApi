@@ -1,6 +1,6 @@
 "use strict";
 /* --------------------------------------------------------------------------
-    * NODEJS EXPRESS | Flight API
+    * NODEJS EXPRESS | Blog API
 ----------------------------------------------------------------------------- */
 //? Requaring
 const Token = require("../models/token");
