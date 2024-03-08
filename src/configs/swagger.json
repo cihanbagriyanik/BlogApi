@@ -727,6 +727,59 @@
         }
       }
     },
+    "/blogs/{id}/getLike": {
+      "get": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Get Like Info",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/blogs/{id}/postLike": {
+      "post": {
+        "tags": [
+          "Blogs"
+        ],
+        "summary": "Add/Remove Like",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
     "/comments/": {
       "get": {
         "tags": [
@@ -1120,6 +1173,10 @@
               "items": {
                 "type": "string"
               }
+            },
+            "unique": {
+              "type": "boolean",
+              "example": true
             }
           }
         }

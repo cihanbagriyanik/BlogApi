@@ -7,25 +7,35 @@ const { mongoose } = require("../configs/dbConnection");
 
 /* -------------------------------------------------------------------------- */
 // {
-//     "name": "Category 1",
+//   "": "",
 // }
 /* -------------------------------------------------------------------------- */
-//? BlogCategory:
-const CategorySchmea = new mongoose.Schema(
+//? Like Model:
+const LikeSchmea = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      trim: true,
-      required: [true, "You should write category name."],
-      unique: true,
+    blogId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Blog",
+      required: true,
     },
+
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
+    // like: {
+    //   type: Boolean,
+    //   default:false
+    // },
   },
 
   {
-    collection: "categories",
+    collection: "likes",
     timestamps: true,
   }
 );
 
 /* -------------------------------------------------------------------------- */
-module.exports = mongoose.model("Categories", CategorySchmea);
+module.exports = mongoose.model("Likes", LikeSchmea);

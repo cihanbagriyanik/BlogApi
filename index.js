@@ -78,6 +78,8 @@ app.use("/categories", require("./src/routers/category"));
 
 // blog:
 app.use("/blogs", require("./src/routers/blog"));
+// like:
+app.use("/blogs", require("./src/routers/like"));
 
 // comment:
 app.use("/comments", require("./src/routers/comment"));

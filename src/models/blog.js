@@ -55,15 +55,15 @@ const BlogSchema = new mongoose.Schema(
 
     comments: [
       {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Comments",
       },
     ],
 
     likes: [
       {
-        type: String,
-        ref: "User",
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Likes",
       },
     ],
 
