@@ -5,14 +5,30 @@
 //? Requaring
 const router = require("express").Router();
 
-const Like = require("../controllers/like");
+/* -------------------------------------------------------------------------- */
+//? Routes:
+//! URL: /
+
+// auth:
+router.use("/auth", require("./auth"));
+
+// token:
+router.use("/tokens", require("./token"));
+
+// user:
+router.use("/users", require("./user"));
+
+// category:
+router.use("/categories", require("./category"));
+
+// blog:
+router.use("/blogs", require("./blog"));
+
+// comment:
+router.use("/comments", require("./comment"));
+
+// document:
+router.use("/documents", require("./document"));
 
 /* -------------------------------------------------------------------------- */
-//? BlogLike:
-router.route("/:id/getlike").get(Like.read);
-
-router.route("/:id/postLike").post(Like.create);
-
-/* -------------------------------------------------------------------------- */
-//? Export:
 module.exports = router;

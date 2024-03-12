@@ -64,28 +64,8 @@ app.all("/", (req, res) => {
   });
 });
 
-// auth:
-app.use("/auth", require("./src/routers/auth"));
-
-// token:
-app.use("/tokens", require("./src/routers/token"));
-
-// user:
-app.use("/users", require("./src/routers/user"));
-
-// category:
-app.use("/categories", require("./src/routers/category"));
-
-// blog:
-app.use("/blogs", require("./src/routers/blog"));
-// like:
-app.use("/blogs", require("./src/routers/like"));
-
-// comment:
-app.use("/comments", require("./src/routers/comment"));
-
-// document:
-app.use("/documents", require("./src/routers/document"));
+// Routes:
+app.use(require("./src/routers"));
 
 /* -------------------------------------------------------------------------- */
 //? errorHandler:

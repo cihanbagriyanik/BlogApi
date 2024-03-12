@@ -19,6 +19,11 @@ router
   .patch(Blog.update)
   .delete(Blog.delete);
 
+//? Blog Like Router
+router.route("/:id/getlike").get(Blog.getLike);
+
+router.route("/:id/postlike").post(Blog.postLike);
+
 /* -------------------------------------------------------------------------- */
 //? Export:
 module.exports = router;

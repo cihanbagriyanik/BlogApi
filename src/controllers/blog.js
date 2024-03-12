@@ -29,11 +29,16 @@ module.exports = {
         `
     */
 
-    const data = await res.getModelList(Blog);
+    // isPublish = true
+    const filters = req.query?.author
+      ? { userId: req.query.author }
+      : { isPublish: true };
+
+    const data = await res.getModelList(Blog, filters);
 
     res.status(200).send({
       error: false,
-      details: await res.getModelListDetails(Blog),
+      details: await res.getModelListDetails(Blog, filters),
       data,
     });
   },
@@ -57,11 +62,14 @@ module.exports = {
             }
     */
 
+    // Add logined userId to req.body:
+    req.body.userId = req.user?._id;
+
     const data = await Blog.create(req.body);
 
     res.status(201).send({
       error: false,
-      body: req.body,
+      // body: req.body,
       data,
     });
   },
@@ -73,9 +81,21 @@ module.exports = {
         #swagger.summary = "Get Single Blog"
     */
 
-    const data = await Blog.findOne({ _id: req.params.id }).populate(
-      "categoryId"
-    );
+    const data = await Blog.findOne({ _id: req.params.id }).populate([
+      { path: "userId", select: "username firstName lastName" },
+      { path: "categoryId" },
+      {
+        path: "comments",
+        populate: { path: "userId", select: "username firstName lastName" },
+      },
+    ]);
+
+    // Visitor Counter for per IP:
+    if (req.session?.visitorIp != req.ip) {
+      req.session.visitorIp = req.ip;
+      data.countOfVisitors++;
+      data.save();
+    }
 
     res.status(200).send({
       error: false,
@@ -101,11 +121,20 @@ module.exports = {
           }
     */
 
-    const data = await Blog.updateOne({ _id: req.params.id }, req.body);
+    // Only owner:
+    const filters =
+      req.user && !req.user.isAdmin ? { userId: req.user._id } : {};
+
+    const data = await Blog.updateOne(
+      { _id: req.params.id, ...filters },
+      req.body,
+      { runValidators: true }
+    );
 
     res.status(202).send({
       error: false,
       data,
+      new: await Blog.findOne({ _id: req.params.id }),
     });
   },
 
@@ -116,11 +145,67 @@ module.exports = {
         #swagger.summary = "Delete Blog"
     */
 
-    const data = await Blog.deleteOne({ _id: req.params.id });
+    // Only owner:
+    const filters =
+      req.user && !req.user.isAdmin ? { userId: req.user._id } : {};
+
+    const data = await Blog.deleteOne({ _id: req.params.id, ...filters });
     // console.log(data);
 
-    res.status(data.deletedCount >= 1 ? 204 : 404).send({
+    res.status(data.deletedCount ? 204 : 404).send({
+      error: !data.deletedCount,
+      data,
+    });
+  },
+
+  /* -------------------------------------------------------------------------- */
+  //! LIKES:
+  getLike: async (req, res) => {
+    /*
+        #swagger.tags = ["Blogs"]
+        #swagger.summary = "Get Like Info"
+    */
+
+    const userId = req.user?.id;
+
+    const data = await Blog.findOne(
+      { _id: req.params.id },
+      { _id: 0, likes: 1 }
+    );
+
+    res.status(200).send({
       error: false,
+      didUserLike: data.likes.includes(userId),
+      countOfLikes: data.likes.length,
+    });
+  },
+
+  postLike: async (req, res) => {
+    /*
+        #swagger.tags = ["Blogs"]
+        #swagger.summary = "Add/Remove Like"
+        #swagger.parameters['body'] = {
+            in: 'body',
+            required: true,
+            schema: {}
+        }
+    */
+
+    const userId = req.user?.id;
+
+    const data = await Blog.findOne({ _id: req.params.id });
+
+    if (data.likes.includes(userId)) {
+      data.likes.pull(userId);
+    } else {
+      data.likes.push(userId);
+    }
+    data.save();
+
+    res.status(202).send({
+      error: false,
+      didUserLike: data.likes.includes(userId),
+      countOfLikes: data.likes.length,
     });
   },
 };
