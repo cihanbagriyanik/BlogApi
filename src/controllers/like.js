@@ -37,7 +37,7 @@ module.exports = {
     */
 
     const data = await Like.findOne({ _id: req.params.id }).populate(
-      "categoryId"
+      "blogId"
     );
 
     res.status(200).send({

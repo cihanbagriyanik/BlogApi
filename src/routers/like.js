@@ -9,7 +9,7 @@ const Like = require("../controllers/like");
 
 /* -------------------------------------------------------------------------- */
 //? BlogLike:
-router.route("/:id/getLike").get(Like.read);
+router.route("/:id/getlike").get(Like.read);
 
 router.route("/:id/postLike").post(Like.create);
 
