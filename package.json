@@ -2,7 +2,7 @@
   "name": "blog-api",
   "version": "1.0.0",
   "title": "Blog API",
-  "description": "Blog API Management",
+  "description": "Blog API Documentation",
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
