@@ -54,6 +54,7 @@ app.all("/", (req, res) => {
   res.send({
     error: false,
     message: "Welcome to Blog Api",
+    gitHub: "https://github.com/cihanbagriyanik/BlogApi",
     isLogin: req.isLogin,
     documents: {
       swagger: "/documents/swagger",

@@ -88,14 +88,21 @@ module.exports = {
         path: "comments",
         populate: { path: "userId", select: "username firstName lastName" },
       },
+      /* -------------------------------------------------------------------------- */
+
+      /* -------------------------------------------------------------------------- */
     ]);
 
+    /* -------------------------------------------------------------------------- */
+    //! Count of visitor icin sonra edit lenecek...
     // Visitor Counter for per IP:
-    if (req.session?.visitorIp != req.ip) {
-      req.session.visitorIp = req.ip;
-      data.countOfVisitors++;
-      data.save();
-    }
+    // if (req.session?.visitorIp != req.ip) {
+    //   req.session.visitorIp = req.ip;
+    //   data.countOfVisitors++;
+    //   data.save();
+    // }
+    //! Count of visitor icin sonra edit lenecek...
+    /* -------------------------------------------------------------------------- */
 
     res.status(200).send({
       error: false,
