@@ -15,10 +15,10 @@ router.route("/").get(permissions.isAdmin, user.list).post(user.create); //userC
 
 router
   .route("/:id")
-  .get(permissions.isStaffOrisAdmin, user.read)
-  .put(permissions.isStaffOrisAdmin, user.update)
-  .patch(permissions.isStaffOrisAdmin, user.update)
-  .delete(permissions.isStaffOrisAdmin, user.delete);
+  .get(permissions.isStaff || permissions.isAdmin, user.read)
+  .put(permissions.isStaff || permissions.isAdmin, user.update)
+  .patch(permissions.isStaff || permissions.isAdmin, user.update)
+  .delete(permissions.isStaff || permissions.isAdmin, user.delete);
 
 /* -------------------------------------------------------------------------- */
 module.exports = router;
