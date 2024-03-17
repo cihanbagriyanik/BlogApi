@@ -13,7 +13,7 @@
       "name": "ISC Licence"
     }
   },
-  "host": "127.0.0.1:8000",
+  "host": "https://blog-api-9uyr.onrender.com",
   "basePath": "/",
   "schemes": [
     "http",
@@ -727,7 +727,7 @@
         }
       }
     },
-    "/blogs/{id}/getLike": {
+    "/blogs/{id}/getlike": {
       "get": {
         "tags": [
           "Blogs"
@@ -749,7 +749,7 @@
         }
       }
     },
-    "/blogs/{id}/postLike": {
+    "/blogs/{id}/postlike": {
       "post": {
         "tags": [
           "Blogs"
