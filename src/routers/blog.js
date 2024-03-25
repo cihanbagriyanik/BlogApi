@@ -20,9 +20,9 @@ router
   .delete(Blog.delete);
 
 //? Blog Like Router
-router.route("/:id/getlike").get(Blog.getLike);
+router.route("/:id/getlike").get(Blog.listLike);
 
-router.route("/:id/postlike").post(Blog.postLike);
+router.route("/:id/postlike").post(Blog.createLike);
 
 /* -------------------------------------------------------------------------- */
 //? Export:

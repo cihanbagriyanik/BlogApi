@@ -166,8 +166,10 @@ module.exports = {
   },
 
   /* -------------------------------------------------------------------------- */
-  //! LIKES:
-  getLike: async (req, res) => {
+  //! --------------------------------- LIKES --------------------------------- */
+
+  //! GET
+  listLike: async (req, res) => {
     /*
         #swagger.tags = ["Blogs"]
         #swagger.summary = "Get Like Info"
@@ -187,7 +189,8 @@ module.exports = {
     });
   },
 
-  postLike: async (req, res) => {
+  //! POST
+  createLike: async (req, res) => {
     /*
         #swagger.tags = ["Blogs"]
         #swagger.summary = "Add/Remove Like"
