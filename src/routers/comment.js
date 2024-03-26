@@ -9,6 +9,7 @@ const Comment = require("../controllers/comment");
 
 /* -------------------------------------------------------------------------- */
 //? BlogComment:
+//! URL : /comments
 router.route("/").get(Comment.list).post(Comment.create);
 
 router

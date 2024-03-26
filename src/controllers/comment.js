@@ -49,7 +49,11 @@ module.exports = {
             }
     */
 
+    // Add logined userId to req.body:
+    req.body.userId = req.user._id;
+
     const data = await Comment.create(req.body);
+
 
     res.status(201).send({
       error: false,
