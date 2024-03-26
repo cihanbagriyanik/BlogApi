@@ -28,4 +28,4 @@ const CategorySchmea = new mongoose.Schema(
 );
 
 /* -------------------------------------------------------------------------- */
-module.exports = mongoose.model("Categories", CategorySchmea);
+module.exports = mongoose.model("Category", CategorySchmea);

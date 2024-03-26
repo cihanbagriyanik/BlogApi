@@ -26,7 +26,7 @@ const BlogSchema = new mongoose.Schema(
 
     categoryId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Categories",
+      ref: "Category",
       required: true,
     },
 
@@ -56,7 +56,7 @@ const BlogSchema = new mongoose.Schema(
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Comments",
+        ref: "Comment",
       },
     ],
 

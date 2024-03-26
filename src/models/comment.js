@@ -41,4 +41,4 @@ const CommentSchmea = new mongoose.Schema(
 );
 
 /* -------------------------------------------------------------------------- */
-module.exports = mongoose.model("Comments", CommentSchmea);
+module.exports = mongoose.model("Comment", CommentSchmea);
