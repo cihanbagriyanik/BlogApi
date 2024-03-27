@@ -7,9 +7,13 @@ const router = require("express").Router();
 
 const Blog = require("../controllers/blog");
 
+const {isLogin} = require("../middlewares/permissions");
+
 /* -------------------------------------------------------------------------- */
 //? Blog Router:
 //! URL : /blogs
+router.use(isLogin);
+
 router.route("/").get(Blog.list).post(Blog.create);
 
 router
