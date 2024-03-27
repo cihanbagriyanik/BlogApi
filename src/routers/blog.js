@@ -7,21 +7,20 @@ const router = require("express").Router();
 
 const Blog = require("../controllers/blog");
 
-const {isLogin} = require("../middlewares/permissions");
+const permissions = require("../middlewares/permissions");
 
 /* -------------------------------------------------------------------------- */
 //? Blog Router:
 //! URL : /blogs
-router.use(isLogin);
 
-router.route("/").get(Blog.list).post(Blog.create);
+router.route("/").get(Blog.list).post(permissions.isLogin, Blog.create);
 
 router
   .route("/:id")
-  .get(Blog.read)
-  .put(Blog.update)
-  .patch(Blog.update)
-  .delete(Blog.delete);
+  .get(permissions.isLogin, Blog.read)
+  .put(permissions.isLogin, Blog.update)
+  .patch(permissions.isLogin, Blog.update)
+  .delete(permissions.isLogin, Blog.delete);
 
 //? Blog Like Router
 router.route("/:id/getlike").get(Blog.listLike);
