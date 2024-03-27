@@ -15,22 +15,22 @@ module.exports = {
     /*
         #swagger.tags = ["Authentication"]
         #swagger.summary = "Login"
-        #swagger.description = 'Login with username (or email) and password for get simpleToken and JWT'
+        #swagger.description = 'Login with email and password for get simpleToken and JWT'
         _swagger.deprecated = true
         _swagger.ignore = true
         #swagger.parameters["body"] = {
             in: "body",
             required: true,
             schema: {
-                "username": "test",
-                "password": "1234",
+                "email": "test.site.com",
+                "password": "1q2w23e4R!",
             }
         }
     */
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    if (username && password) {
-      const user = await User.findOne({ username });
+    if (email && password) {
+      const user = await User.findOne({ email });
 
       if (user && user.password == passwordEncrypt(password)) {
         if (user.isActive) {
@@ -80,11 +80,11 @@ module.exports = {
         }
       } else {
         res.errorStatusCode = 401;
-        throw new Error("Please enter username and password.");
+        throw new Error("Please enter email and password.");
       }
     } else {
       res.errorStatusCode = 401;
-      throw new Error("Please enter username and password.");
+      throw new Error("Please enter email and password.");
     }
   },
 
