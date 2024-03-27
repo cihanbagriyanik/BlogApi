@@ -37,6 +37,23 @@ dbConnection();
 
 // Accept JSON:
 app.use(express.json());
+/* -------------------------------------------------------------------------- */
+//! BE AND FE CONNECT
+// CORS
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: [
+      "https://blog-app-cihan.vercel.app/",
+      "https://milestone-blog-app-react-ts-vite-mui-redux-formik-98w9fvymu.vercel.app/",
+      "http://localhost:5173",
+      "http://localhost:3000",
+    ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  })
+);
+//! BE AND FE CONNECT
 
 // Check Token:
 app.use(require("./src/middlewares/authentication"));
