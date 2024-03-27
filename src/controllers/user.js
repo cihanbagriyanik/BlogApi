@@ -26,10 +26,27 @@ module.exports = {
 
     const data = await res.getModelList(User);
 
+    const modifiedData = data.map((blog) => ({
+      _id: blog._id,
+      username: blog.username,
+      password: blog.password,
+      email: blog.email,
+      firstName: blog.firstName,
+      lastName: blog.lastName,
+      image: blog.image,
+      city: blog.city,
+      bio: blog.bio,
+      isActive: blog.isActive,
+      isStaff: blog.isStaff,
+      isAdmin: blog.isAdmin,
+      createdAt: blog.createdAt,
+      updatedAt: blog.updatedAt,
+    }));
+
     res.status(200).send({
       error: false,
       details: await res.getModelListDetails(User),
-      data,
+      data: modifiedData,
     });
   },
 
@@ -74,7 +91,22 @@ module.exports = {
 
     res.status(200).send({
       error: false,
-      data,
+      data: {
+        _id: data._id,
+        username: data.username,
+        password: data.password,
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        image: data.image,
+        city: data.city,
+        bio: data.bio,
+        isActive: data.isActive,
+        isStaff: data.isStaff,
+        isAdmin: data.isAdmin,
+        createdAt: data.createdAt,
+        updatedAt: data.updatedAt,
+      },
     });
   },
 
@@ -103,10 +135,30 @@ module.exports = {
       runValidators: true,
     });
 
+    const updatedUser = await User.findOne({ _id: req.params.id });
+
+    const modifiedUser = {
+      _id: updatedUser._id,
+      username: updatedUser.username,
+      password: updatedUser.password,
+      email: updatedUser.email,
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName,
+      image: updatedUser.image,
+      city: updatedUser.city,
+      bio: updatedUser.bio,
+      isActive: updatedUser.isActive,
+      isStaff: updatedUser.isStaff,
+      isAdmin: updatedUser.isAdmin,
+      createdAt: updatedUser.createdAt,
+      updatedAt: updatedUser.updatedAt,
+    };
+
     res.status(202).send({
       error: false,
       data,
-      new: await User.findOne({ _id: req.params.id }),
+      new: modifiedUser,
+      // new: await User.findOne({ _id: req.params.id }),
     });
   },
 
