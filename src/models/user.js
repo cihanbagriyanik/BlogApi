@@ -1,4 +1,5 @@
 "use strict";
+const { json } = require("express");
 /* --------------------------------------------------------------------------
     * NODEJS EXPRESS | Blog API
 ----------------------------------------------------------------------------- */
@@ -92,12 +93,25 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+
+    visitedBlogs: {
+      type: [],
+      // select: false,
+    },
   },
   {
     collection: "users",
     timestamps: true,
   }
 );
+
+// /* -------------------------------------------------------------------------- */
+//! veriyi cikti vermeden hemen once manipulasyon:
+// pre ,init, pre save,postsave ...
+// UserSchema.pre("init", function (document) {
+//   document.__v = undefined; // görünümden kaldırır
+//   document.visitedBlogs = undefined; // görünümden kaldırır
+// });
 
 /* -------------------------------------------------------------------------- */
 module.exports = mongoose.model("User", UserSchema);

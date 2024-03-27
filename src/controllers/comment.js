@@ -4,6 +4,7 @@
 ----------------------------------------------------------------------------- */
 //? Requaring
 const Comment = require("../models/comment");
+const Blog = require("../models/blog");
 
 /* -------------------------------------------------------------------------- */
 //? Comment CONTROLLER
@@ -51,8 +52,14 @@ module.exports = {
 
     // Add logined userId to req.body:
     req.body.userId = req.user._id;
+    // console.log(req.user._id);
 
     const data = await Comment.create(req.body);
+    // console.log(data._id);
+
+    const blog = await Blog.findById(req.body.blogId);
+    blog.comments.push(data._id);
+    await blog.save();
 
     res.status(201).send({
       error: false,

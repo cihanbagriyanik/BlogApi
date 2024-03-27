@@ -16,6 +16,7 @@
 /* -------------------------------------------------------------------------- */
 //? Required Modules:
 const express = require("express");
+const session = require("express-session");
 const app = express();
 
 // envVariables to process.env:
@@ -24,6 +25,16 @@ const PORT = process.env?.PORT || 8000;
 
 // asyncErrors to errorHandler:
 require("express-async-errors");
+
+/* -------------------------------------------------------------------------- */
+//? Session Modules:
+app.use(
+  session({
+    secret: process.env?.SECRET_KEY,
+    resave: true, // Oturum bilgileri değişmediğinde bile oturum kayıtlarının tekrar kaydedilip kaydedilmeyeceğini belirler
+    saveUninitialized: true, // Oturum oluşturulduğunda oturum verisinin değişip değişmediğini belirler
+  })
+);
 
 /* -------------------------------------------------------------------------- */
 //? Configrations:

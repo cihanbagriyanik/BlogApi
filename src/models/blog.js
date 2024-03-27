@@ -71,6 +71,11 @@ const BlogSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+
+    visitedUsers: {
+      type: [],
+      // select: false,
+    },
   },
 
   {
@@ -78,6 +83,14 @@ const BlogSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+// /* -------------------------------------------------------------------------- */
+//! veriyi cikti vermeden hemen once manipulasyon:
+// pre ,init, pre save,postsave ...
+// BlogSchema.pre("init", function (document) {
+//   document.__v = undefined; // görünümden kaldırır
+//   document.visitedUsers = undefined; // görünümden kaldırır
+// });
 
 /* -------------------------------------------------------------------------- */
 module.exports = mongoose.model("Blog", BlogSchema);
