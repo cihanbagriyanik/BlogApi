@@ -25,7 +25,7 @@ router
 //? Blog Like Router
 router.route("/:id/getlike").get(Blog.listLike);
 
-router.route("/:id/postlike").post(Blog.createLike);
+router.route("/:id/postlike").post(permissions.isLogin, Blog.createLike);
 
 /* -------------------------------------------------------------------------- */
 //? Export:

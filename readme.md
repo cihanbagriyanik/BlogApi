@@ -68,7 +68,7 @@ Blog API
 
 [Blog App GitHub](https://github.com/cihanbagriyanik/Milestone-_BlogApp_react-ts-vite-mui-redux-formik-yup)
 
-[Blog App (Link)](https://blog-app-cihan.vercel.app/)
+[Blog App (Link)](https://blog-app-cihann.vercel.app/)
 
 ## Technologies Used
 
