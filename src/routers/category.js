@@ -13,12 +13,12 @@ const permissions = require("../middlewares/permissions");
 //? BlogCategory:
 router
   .route("/")
-  .get(permissions.isLogin, Category.list)
+  .get(Category.list)
   .post(permissions.isAdmin || permissions.isStaff, Category.create);
 
 router
   .route("/:id")
-  .get(permissions.isLogin, Category.read)
+  .get(Category.read)
   .put(permissions.isAdmin || permissions.isStaff, Category.update)
   .patch(permissions.isAdmin || permissions.isStaff, Category.update)
   .delete(permissions.isAdmin || permissions.isStaff, Category.delete);
