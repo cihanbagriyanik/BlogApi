@@ -4,6 +4,8 @@
 ----------------------------------------------------------------------------- */
 //? Requaring
 const User = require("../models/user");
+const Token = require("../models/token");
+const jwt = require("jsonwebtoken");
 
 /* -------------------------------------------------------------------------- */
 //? User Controller:
@@ -72,12 +74,44 @@ module.exports = {
           }
     */
 
-    const data = await User.create(req.body);
+    const { email, password } = req.body;
 
-    res.status(201).send({
-      error: false,
-      data,
-    });
+    if (email && password) {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        // Kullanıcıyı oluştur
+        const data = await User.create(req.body);
+
+        // Token oluştur
+        const token = jwt.sign({ userId: data._id }, process.env.ACCESS_KEY, {
+          expiresIn: "30m",
+        });
+
+        // Tokeni kaydet
+        await Token.create({ userId: data._id, token });
+
+        // Kullanıcı ve tokeni yanıtla
+        res.status(201).send({
+          error: false,
+          data,
+          token,
+        });
+      } else {
+        res.errorStatusCode = 400;
+        throw new Error("User with this email already exists.");
+      }
+    } else {
+      res.errorStatusCode = 400;
+      throw new Error("Please provide email and password.");
+    }
+
+    // const data = await User.create(req.body);
+
+    // res.status(201).send({
+    //   error: false,
+    //   data,
+    // });
   },
 
   //! /:id -> GET
