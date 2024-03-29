@@ -80,18 +80,16 @@ module.exports = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        // Kullanıcıyı oluştur
+        // User create
         const data = await User.create(req.body);
 
-        // Token oluştur
+        // Token create
         const token = jwt.sign({ userId: data._id }, process.env.ACCESS_KEY, {
           expiresIn: "30m",
         });
 
-        // Tokeni kaydet
         await Token.create({ userId: data._id, token });
 
-        // Kullanıcı ve tokeni yanıtla
         res.status(201).send({
           error: false,
           data,
@@ -105,13 +103,6 @@ module.exports = {
       res.errorStatusCode = 400;
       throw new Error("Please provide email and password.");
     }
-
-    // const data = await User.create(req.body);
-
-    // res.status(201).send({
-    //   error: false,
-    //   data,
-    // });
   },
 
   //! /:id -> GET
