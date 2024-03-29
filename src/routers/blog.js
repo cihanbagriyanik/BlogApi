@@ -17,7 +17,7 @@ router.route("/").get(Blog.list).post(permissions.isLogin, Blog.create);
 
 router
   .route("/:id")
-  .get(Blog.read)
+  .get(permissions.isLogin, Blog.read)
   .put(permissions.isLogin, Blog.update)
   .patch(permissions.isLogin, Blog.update)
   .delete(permissions.isLogin, Blog.delete);
